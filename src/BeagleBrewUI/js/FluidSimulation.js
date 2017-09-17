@@ -321,9 +321,6 @@ class Fluid {
     }
 }
 
-
-
-
 class Direction {
     constructor(rotation) {
         this.rotation = rotation;
