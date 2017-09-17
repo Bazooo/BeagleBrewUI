@@ -1,4 +1,12 @@
 class ObjectScraper {
+
+    /**
+     * Returns the bottom object with the specified key and value
+     * @param  {Object}     obj Object to be scraped
+     * @param  {String}     k   Key of the variable
+     * @param  {Variable}   v   Unique value of the key
+     * @return {Object}         Object with the key and value
+     */
     scrape(obj, k, v) {
         for(const key in obj) {
             let value = obj[key];

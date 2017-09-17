@@ -13,19 +13,10 @@ div.beagleBrewGrid {
         transform: scale(1);
         transition: transform 500ms;
         width: 700px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
 
         .clickable {
             cursor: pointer;
         }
-
-        // &>div.beagleBrewGrid-tanks {
-        //     position: absolute;
-        //     // width: 950px;
-        //     // height: 700px;
-        // }
 
         div.beagleBrewGrid-assets {
             width: 100%;

@@ -255,6 +255,7 @@ class BrewGridInit {
     addMiscAsset(misc) {
         var x = misc.x - 1;
         var y = misc.y - 1;
+        this.redimensionGrid(x + 1, y + 1);
         if(this.assetGrid[y][x] === null) {
             var asset = {};
             asset.rotation = 0;
