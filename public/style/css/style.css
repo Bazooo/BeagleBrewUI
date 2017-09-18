@@ -680,7 +680,7 @@ div.beagleBrewGrid div.openControlPanel div.beagleBrewGrid-container {
 		stroke-opacity: 1;
 	}
 	100% {
-		stroke-opacity: 0.6;
+		stroke-opacity: 0.4;
 	}
 }
 
@@ -887,6 +887,10 @@ div.beagleBrewGrid div.openControlPanel div.beagleBrewGrid-container {
 
 .brew-asset.cooler .cooler-icon {
 	animation: 1s ease-in-out 0s infinite alternate backwards paused opacity;
+}
+
+.brew-asset.cooler .cooler-icon polyline {
+	stroke-width: 2px;
 }
 
 .brew-asset.cooler.active .cooler-icon {

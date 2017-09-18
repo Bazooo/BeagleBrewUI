@@ -91,7 +91,8 @@ class BrewGridInit {
      * @param {Object} tank The tank to be added
      */
     addTank(tank) {
-        for(var i = 0; i < tank.inputs.length; i++) {
+        let i;
+        for(i = 0; i < tank.inputs.length; i++) {
             this.placeInputOutput(tank.inputs[i], tank.x, tank.y);
         }
         for(i = 0; i < tank.outputs.length; i++) {

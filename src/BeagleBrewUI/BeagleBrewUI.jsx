@@ -24,20 +24,15 @@ var tanks;
 class App extends Component {
     constructor() {
         super();
-        this.socketId = 'socketId';
         this.updateData = this.updateData.bind(this);
+        this.socketId = "socketId";
     }
 
     componentWillMount() {
         BrewGridStore.on("change", this.updateData);
-
-        //Create socket if not already created
-        if (!this.socket)
-            this.socket = new SocketCom();
-
-        //Add a subscription to get all the states
-        this.socket.addStateChangeSub(this.socketId, BrewGridActions.changeStates);
         this.initializeGrid();
+        //Add a subscription to get all the states
+        BrewGridStore.socket.addStateChangeSub(this.socketId, BrewGridActions.changeStates);
     }
 
     /**
@@ -58,7 +53,7 @@ class App extends Component {
 
     componentWillUnmount() {
         //Remove subscriptions to states
-        this.socket.removeStateChangeSub(this.socketId);
+        BrewGridStore.socket.removeStateChangeSub(this.socketId);
         BrewGridStore.removeListener("change", this.updateData);
     }
 
@@ -105,7 +100,8 @@ class BrewGrid extends Component {
 
     render() {
         const rows = assetGrid.map((data, index) =>
-            <BrewGridRow statusRow={this.props.statusGrid[index]} fluidRow={this.props.fluidGrid[index]} rowData={data} row={index} key={index}/>
+            <BrewGridRow statusRow={this.props.statusGrid[index]} fluidRow={this.props.fluidGrid[index]} rowData={data}
+                         row={index} key={index}/>
         );
         const tankGrid = tanks;
         const gridDimensions = {
@@ -138,7 +134,8 @@ class BrewGridRow extends Component {
     render() {
         const rows = this.props.rowData;
         const squares = rows.map((data, index) =>
-            <BrewAssetSquare status={this.props.statusRow[index]} fluid={this.props.fluidRow[index]} assetData={data} key={index}/>
+            <BrewAssetSquare status={this.props.statusRow[index]} fluid={this.props.fluidRow[index]} assetData={data}
+                             key={index}/>
         );
 
         return (
