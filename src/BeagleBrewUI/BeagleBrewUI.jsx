@@ -36,8 +36,7 @@ class App extends Component {
     }
 
     /**
-     * Initialize the grid and adds it to
-     * @return {[type]} [description]
+     * Initialize the grid and adds it to the state
      */
     initializeGrid() {
         const gridInit = new BrewGridInit(BrewGridStore.getBrewAssets());

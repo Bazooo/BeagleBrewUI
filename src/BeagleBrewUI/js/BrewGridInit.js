@@ -134,10 +134,11 @@ class BrewGridInit {
             }
         }
 
-        var assetData = {};
-        assetData.assetId = "t1";
-        assetData.rotation = rotation;
-        assetData.posTubing = -1;
+        var assetData = {
+            assetId: "t1",
+            rotation: rotation,
+            posTubing: -1
+        };
         this.changeAssetGridAt(tubeX - 1, tubeY - 1, assetData);
     }
 
