@@ -25,7 +25,7 @@ export default class BrewAssetClickable extends BrewAsset {
 
     render(assetCode, assetClass, hasRotation) {
         return (
-            <div className={this.getClass(assetClass, hasRotation)} onClick={this.clickHandler}>
+            <div className={this.getClass(assetClass, hasRotation)} onClick={this.clickHandler} data-id={this.props.data.id}>
                 {assetCode}
             </div>
         );

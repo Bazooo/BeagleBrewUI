@@ -20,7 +20,7 @@ export default class Tank extends BrewAssetClickable {
             </div>;
 
         return (
-            <div className={this.getClass(assetClass, false)} onClick={this.clickHandler} style={{width: width + "%", height: height + "%", left: x, top: y}}>
+            <div className={this.getClass(assetClass, false)} onClick={this.clickHandler} style={{width: width + "%", height: height + "%", left: x, top: y}} data-id={this.props.data.id}>
                 {assetCode}
             </div>
         );
