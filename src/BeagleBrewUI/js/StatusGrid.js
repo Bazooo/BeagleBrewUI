@@ -1,4 +1,4 @@
-import ObjectScraper from './ObjectScraper.js';
+import ObjectScraper from "./ObjectScraper.js";
 
 class StatusGrid {
     /**

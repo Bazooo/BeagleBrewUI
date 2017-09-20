@@ -1,25 +1,22 @@
 // React elements
-import React, {Component} from 'react';
-import BrewGridControlPanel from './jsx/BrewGridControlPanel';
-import {
-    BrewAssetSquare,
-    BrewAssetTank
-} from './jsx/BrewGridAssets';
+import React, {Component} from "react";
+import BrewGridControlPanel from "./jsx/BrewGridControlPanel";
+import BrewAssetSquare from "./jsx/BrewGridAssets";
+import Tank from "./jsx/BrewAssets/Tank";
 
 // Brew Grid logic
-import BrewGridInit from './js/BrewGridInit.js';
-import FluidSimulation from './js/FluidSimulation.js';
-import SocketCom from './js/SocketCom.js';
-import StatusGrid from './js/StatusGrid.js';
+import BrewGridInit from "./js/BrewGridInit.js";
+import FluidSimulation from "./js/FluidSimulation.js";
+import StatusGrid from "./js/StatusGrid.js";
 
 // Flux
-import BrewGridStore from './stores/BrewGridStore';
-import * as BrewGridActions from './actions/BrewGridActions';
+import BrewGridStore from "./stores/BrewGridStore";
+import * as BrewGridActions from "./actions/BrewGridActions";
 
 // Fluid simulation
-var fluidSim;
-var assetGrid;
-var tanks;
+let fluidSim;
+let assetGrid;
+let tanks;
 
 class App extends Component {
     constructor() {
@@ -46,7 +43,7 @@ class App extends Component {
         fluidSim = new FluidSimulation(assetGrid, tanks, statusGrid);
         this.setState({
             fluidGrid: fluidSim.getFluidGrid(),
-            statusGrid: statusGrid
+            statusGrid: statusGrid,
         });
     }
 
@@ -61,7 +58,7 @@ class App extends Component {
         fluidSim.simulateFluid(statusGrid);
         this.setState({
             fluidSim: fluidSim.getFluidGrid(),
-            statusGrid: statusGrid
+            statusGrid: statusGrid,
         });
     }
 
@@ -76,16 +73,24 @@ class BrewGrid extends Component {
     constructor(props) {
         super(props);
         this.toggleCP = this.toggleCP.bind(this);
+        this.flowData = this.flowData.bind(this);
         this.state = {
-            showCP: false
+            showCP: false,
         };
     }
 
     toggleCP() {
-        var asset = BrewGridStore.getDataFlow();
         this.setState((prevState) => ({
-            showCP: !prevState.showCP
+            showCP: !prevState.showCP,
         }));
+        this.flowData();
+    }
+
+    flowData() {
+        let flowStatus = BrewGridStore.getDataFlow();
+        this.setState({
+            flowStatus: flowStatus,
+        });
     }
 
     componentWillMount() {
@@ -93,25 +98,25 @@ class BrewGrid extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowSize);
+        window.removeEventListener("resize", this.updateWindowSize);
         BrewGridStore.removeListener("Toggle Control Panel", this.toggleCP);
     }
 
     render() {
         const rows = assetGrid.map((data, index) =>
             <BrewGridRow statusRow={this.props.statusGrid[index]} fluidRow={this.props.fluidGrid[index]} rowData={data}
-                         row={index} key={index}/>
+                row={index} key={index}/>
         );
         const tankGrid = tanks;
         const gridDimensions = {
             width: assetGrid[0].length,
-            height: assetGrid.length
+            height: assetGrid.length,
         };
         const tanksComponents = tankGrid.map((data, index) =>
-            <BrewAssetTank grid={gridDimensions} data={data} key={index}/>
+            <Tank grid={gridDimensions} data={data} key={index}/>
         );
 
-        var toggleCPClass = this.state.showCP ? "openControlPanel" : "";
+        let toggleCPClass = this.state.showCP ? "openControlPanel" : "";
 
         return (
             <div className={"beagleBrewGrid " + toggleCPClass}>
@@ -122,7 +127,7 @@ class BrewGrid extends Component {
                     </div>
                 </div>
                 <div className="beagleBrewCP">
-                    <BrewGridControlPanel/>
+                    <BrewGridControlPanel />
                 </div>
             </div>
         );
@@ -134,7 +139,7 @@ class BrewGridRow extends Component {
         const rows = this.props.rowData;
         const squares = rows.map((data, index) =>
             <BrewAssetSquare status={this.props.statusRow[index]} fluid={this.props.fluidRow[index]} assetData={data}
-                             key={index}/>
+                key={index}/>
         );
 
         return (

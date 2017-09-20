@@ -4,8 +4,8 @@ class Converter {
         this.typeAppToAPI = {
             "valv": "Valves",
             "pump": "Pumps",
-            "tank": "Tanks"
-        }
+            "tank": "Tanks",
+        };
         this.typeApiToApp = this.swapDic(this.typeAppToAPI);
     }
 

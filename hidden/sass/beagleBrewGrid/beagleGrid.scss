@@ -16,6 +16,17 @@ div.beagleBrewGrid {
 
         .clickable {
             cursor: pointer;
+            &::before {
+                content: attr(data-id);
+                display: inline-block;
+                position: absolute;
+                color: $color-cpText;
+                background: transparentize($color-cpMain, 0.2);
+                font-size: 12px;
+                padding: 3px;
+                bottom: 100%;
+                z-index: 999;
+            }
         }
 
         div.beagleBrewGrid-assets {
