@@ -1,7 +1,7 @@
 import {EventEmitter} from "events";
-import dispatcher from '../../dispatcher';
-import * as CST from '../js/constants';
-import ObjectScraper from '../js/ObjectScraper'
+import dispatcher from "../../dispatcher";
+import * as CST from "../js/constants";
+import ObjectScraper from "../js/ObjectScraper";
 
 import brewAssets from "../../exampleDB/gridLayout.json";
 
@@ -82,6 +82,7 @@ class BrewGridStore extends EventEmitter {
             case "Pumps":
                 this.socket.updatePump(id, state.status);
                 break;
+            default:
         }
         this.flowData();
         // emit to UI client

@@ -15,7 +15,7 @@ class ArrayScraper {
             } else {
                 f(elem, newIndex);
             }
-        })
+        });
     }
 }
 

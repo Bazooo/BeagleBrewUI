@@ -1,0 +1,76 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true,
+            "modules": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {"SwitchCase": 1}
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "strict": [2, "never"],
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2,
+        "comma-dangle": [1,"always-multiline"],
+        "no-cond-assign": [2,"except-parens"],
+        "no-console": 1,
+        "no-constant-condition": 2,
+        "no-control-regex": 2,
+        "no-debugger": 1,
+        "no-dupe-args": 2,
+        "no-dupe-keys": 2,
+        "no-duplicate-case": 2,
+        "no-empty-character-class": 2,
+        "no-empty": 1,
+        "no-ex-assign": 2,
+        "no-extra-boolean-cast": 2,
+        "no-extra-semi": 2,
+        "no-func-assign": 2,
+        "no-inner-declarations": [1,"both"],
+        "no-invalid-regexp": 2,
+        "no-irregular-whitespace": 1,
+        "no-negated-in-lhs": 2,
+        "no-obj-calls": 2,
+        "no-regex-spaces": 2,
+        "no-sparse-arrays": 2,
+        "no-unreachable": 2,
+        "use-isnan": 2,
+        "valid-typeof": 2,
+        "eqeqeq": [1,"allow-null"],
+        "no-fallthrough": 1,
+        "no-octal": 2,
+        "no-redeclare": [2,{"builtinGlobals":true}],
+        "no-delete-var": 1,
+        "no-undef": 1,
+        "no-unused-vars": 1,
+        "no-mixed-spaces-and-tabs": [1,"smart-tabs"],
+        "no-var": 1
+    }
+}

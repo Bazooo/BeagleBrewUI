@@ -1,7 +1,7 @@
 /**
  * Created by Alexis on 2017-07-05.
  */
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 import config from "../../internals/api-config";
 
@@ -19,9 +19,9 @@ class SocketCom {
          * @type {io}
          */
         this.socket = new io(ip + ":" + port);
-        this.socket.on('connect', this._onConnect.bind(this));
-        this.socket.on('disconnect', this._onDisconnect.bind(this));
-        this.socket.on('state change', this._onStateChange.bind(this));
+        this.socket.on("connect", this._onConnect.bind(this));
+        this.socket.on("disconnect", this._onDisconnect.bind(this));
+        this.socket.on("state change", this._onStateChange.bind(this));
         this.connected = false;
         this.stateChangeSubs = {};
     }
@@ -31,7 +31,7 @@ class SocketCom {
      * @private
      */
     _onConnect() {
-        console.log('[Socket] Connected');
+        console.log("[Socket] Connected");
         this.connected = true;
     }
 
@@ -40,7 +40,7 @@ class SocketCom {
      * @private
      */
     _onDisconnect() {
-        console.log('[Socket] Disconnected');
+        console.log("[Socket] Disconnected");
         this.connected = false;
         //TODO : Reset admin control if it had
     }
@@ -101,8 +101,8 @@ class SocketCom {
      * @param state The state of the valve
      */
     updateValve(id, state) {
-        this.socket.emit('change valve state', {
-            id: id, state: state
+        this.socket.emit("change valve state", {
+            id: id, state: state,
         });
     }
 
@@ -112,8 +112,8 @@ class SocketCom {
      * @param state The state to change
      */
     updatePump(id, state) {
-        this.socket.emit('change pump state', {
-            id: id, state: state
+        this.socket.emit("change pump state", {
+            id: id, state: state,
         });
 
     }
@@ -124,9 +124,10 @@ class SocketCom {
      * @param temp The temperature to set.
      */
     updateTank(id, temp, controllerStatus) {
-        this.socket.emit('change tank temp', {
-            id: id, setTemp: temp,
-            controllerStatus: controllerStatus
+        this.socket.emit("change tank temp", {
+            id: id,
+            temp: temp,
+            controllerStatus: controllerStatus,
         });
     }
 }

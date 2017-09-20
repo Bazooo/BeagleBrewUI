@@ -1,4 +1,4 @@
-import ArrayScraper from './ArrayScraper';
+import ArrayScraper from "./ArrayScraper";
 
 class FluidSimulation {
     constructor(assetGrid, tankGrid, statusGrid) {
@@ -32,8 +32,8 @@ class FluidSimulation {
                 }
                 let assetFluid = {
                     fluid: false,
-                    liquid: 1
-                }
+                    liquid: 1,
+                };
                 if(asset.assetId === "t4" || asset.assetId === "cool") {
                     assetFluid.fluidA = false;
                     assetFluid.fluidB = false;
@@ -53,11 +53,11 @@ class FluidSimulation {
         // Find I/O in grid assets
         ArrayScraper.scrape(this.assetGrid, (asset, i) => {
             if(asset === null) return;
-            var elem = {
+            let elem = {
                 x: i[1] + 1,
                 y: i[0] + 1,
                 liquid: asset.liquid,
-                direction: asset.rotation
+                direction: asset.rotation,
             };
             switch (asset.assetId) {
                 case "in":
@@ -74,10 +74,10 @@ class FluidSimulation {
 
         ArrayScraper.scrape(this.tankGrid, (tank) => {
             for(const output of tank.outputs) {
-                var testY = output.y - tank.y - 1;
-                var testX = output.x - tank.x - 1;
+                let testY = output.y - tank.y - 1;
+                let testX = output.x - tank.x - 1;
 
-                var rotation = 0;
+                let rotation = 0;
                 if(testX < 0) {
                     // X left or middle
                     if(output.x < tank.x + 1) {
@@ -121,7 +121,7 @@ class FluidSimulation {
         this.removeFluid();
         for(const startPoint of this.starts) {
             if(startPoint.open) {
-                var fluid = new Fluid(startPoint);
+                let fluid = new Fluid(startPoint);
                 this.addFluid(fluid);
             }
         }
@@ -145,14 +145,14 @@ class FluidSimulation {
      * @param {Fluid} fluid The fluid to be added
      */
     addFluid(fluid) {
-        var asset = this.assetGrid[fluid.y][fluid.x];
-        var assetFluid = this.fluidGrid[fluid.y][fluid.x];
-        var assetStatus = this.statusGrid[fluid.y][fluid.x];
+        let asset = this.assetGrid[fluid.y][fluid.x];
+        let assetFluid = this.fluidGrid[fluid.y][fluid.x];
+        let assetStatus = this.statusGrid[fluid.y][fluid.x];
         const point = {
             x: fluid.x,
-            y: fluid.y
+            y: fluid.y,
         };
-        var fluidState = true;
+        let fluidState = true;
         switch(asset.assetId) {
             case "t2":
                 // Curved Tube
@@ -163,8 +163,8 @@ class FluidSimulation {
                     fluid.moveLeft();
                 }
                 break;
-            case "t3":
-                var splitFluid = fluid.split();
+            case "t3": {
+                let splitFluid = fluid.split();
                 // T-Connector Tube
                 // sides / straight
                 switch(asset.rotation) {
@@ -186,6 +186,7 @@ class FluidSimulation {
                 }
                 this.addFluid(splitFluid);
                 break;
+            }
             case "t4":
                 // Intersection Tube
                 // straight
@@ -229,7 +230,7 @@ class FluidSimulation {
                 if(!!assetStatus.status) {
                     fluid.moveUp();
                     if(assetFluid.fluid) {
-                        // TODO: don't cross the streams!
+                        // TODO: don"t cross the streams!
                         return;
                     }
                 } else {
@@ -249,9 +250,7 @@ class FluidSimulation {
                 fluid.moveUp();
         }
         if(point.y === fluid.y && point.x === fluid.x) {
-            console.log(point)
-            console.log("something is bad")
-            return;
+            throw "Cannot reach this point" + point;
         }
         assetFluid.liquid = fluid.liquid;
         assetFluid.fluid = fluidState;
@@ -331,8 +330,8 @@ class Fluid {
         */
         let point = {
             x: this.x,
-            y: this.y
-        }
+            y: this.y,
+        };
         const isVertical = (newDirection / 90) % 2;
         const delta = ((newDirection / 90) - (isVertical + 1)) * -1;
         if(!isVertical) {
@@ -371,7 +370,7 @@ class Fluid {
             x: this.x,
             y: this.y,
             liquid: this.liquid,
-            direction: this.direction
+            direction: this.direction,
         };
         return new Fluid(currentPoint);
     }
