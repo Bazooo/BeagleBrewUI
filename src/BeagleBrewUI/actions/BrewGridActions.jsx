@@ -47,13 +47,9 @@ export function toggleAsset(id, key, event) {
     dispatcher.dispatch({
         type: CST.TOGGLE_ASSET,
         id,
-<<<<<<< HEAD
         key,
-        event
-    })
-=======
+        event,
     });
->>>>>>> assetLabel
 }
 
 export function changeTemp(id, key, event) {
@@ -61,6 +57,6 @@ export function changeTemp(id, key, event) {
         type: CST.CHANGE_TEMP,
         id,
         key,
-        event
+        event,
     });
 }
