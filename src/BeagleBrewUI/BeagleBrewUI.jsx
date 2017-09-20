@@ -1,10 +1,8 @@
 // React elements
 import React, {Component} from 'react';
 import BrewGridControlPanel from './jsx/BrewGridControlPanel';
-import {
-    BrewAssetSquare,
-    BrewAssetTank
-} from './jsx/BrewGridAssets';
+import BrewAssetSquare from './jsx/BrewGridAssets';
+import Tank from "./jsx/BrewAssets/Tank";
 
 // Brew Grid logic
 import BrewGridInit from './js/BrewGridInit.js';
@@ -108,7 +106,7 @@ class BrewGrid extends Component {
             height: assetGrid.length
         };
         const tanksComponents = tankGrid.map((data, index) =>
-            <BrewAssetTank grid={gridDimensions} data={data} key={index}/>
+            <Tank grid={gridDimensions} data={data} key={index}/>
         );
 
         var toggleCPClass = this.state.showCP ? "openControlPanel" : "";

@@ -45,7 +45,7 @@ class BrewGridStore extends EventEmitter {
         let state = result.data;
         // toggle status
         state.status = state.status ? 0 : 1;
-        
+
         // emit to server for supported toggle assets
         switch (result.parent) {
             case "Valves":
@@ -54,6 +54,7 @@ class BrewGridStore extends EventEmitter {
             case "Pumps":
                 this.socket.updatePump(id, state.status);
                 break;
+            default:
         }
 
         // emit to UI client
