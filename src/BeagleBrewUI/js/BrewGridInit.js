@@ -13,7 +13,6 @@ class BrewGridInit {
         return this.assetGrid.slice(0);
     }
     getTanks() {
-        console.log(this.tanks)
         return this.tanks.slice(0);
     }
 
@@ -214,7 +213,7 @@ class BrewGridInit {
                     if(posTubing) {
                         if(gridData.posTubing) {
                             // curved
-                            asset.assetId = "t2"
+                            asset.assetId = "t2";
                             switch(gridData.rotation + modRotation) {
                                 case 270:
                                 asset.rotation = gridData.rotation * modRotation ? 180 : 0;

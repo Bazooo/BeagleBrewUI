@@ -115,7 +115,7 @@ class BrewAssetClickable extends BrewAsset {
     }
 
     clickHandler() {
-        BrewGridActions.requestDataFlow(this);
+        BrewGridActions.requestDataFlow(this.props.data.id);
     }
 
     getClass(assetClass, hasRotation) {
@@ -139,6 +139,7 @@ class BrewAssetToggle extends BrewAssetClickable {
     clickHandler() {
         var data = this.props.data;
         BrewGridActions.toggleAsset(data.id);
+        BrewGridActions.requestDataFlow(data.id);
     }
 }
 
