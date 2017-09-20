@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
 export default class BrewAsset extends Component {
     getAssetStatusClass() {
-        var status = this.isActive() ? " active" : "";
+        let status = this.isActive() ? " active" : "";
 
-        var fluid = this.getFluidClass();
+        let fluid = this.getFluidClass();
         return status + fluid;
     }
 
@@ -29,8 +29,8 @@ export default class BrewAsset extends Component {
         const baseClass = "brew-asset";
         assetClass = " " + assetClass;
         const rotationClass = hasRotation ? " r" + this.props.data.rotation : "";
-        var statusClass = this.getAssetStatusClass();
-        var elemClass = baseClass + assetClass + rotationClass + statusClass;
+        let statusClass = this.getAssetStatusClass();
+        let elemClass = baseClass + assetClass + rotationClass + statusClass;
         return elemClass;
     }
 

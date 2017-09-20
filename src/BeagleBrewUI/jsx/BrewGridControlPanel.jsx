@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import BrewGridStore from '../stores/BrewGridStore';
-import * as BrewGridActions from '../actions/BrewGridActions';
+import React, {Component} from "react";
+import BrewGridStore from "../stores/BrewGridStore";
+import * as BrewGridActions from "../actions/BrewGridActions";
 import variables from "../../exampleDB/controlPanelVariables.json";
 
 class BrewGridControlPanel extends Component {
@@ -12,7 +12,7 @@ class BrewGridControlPanel extends Component {
         this.updateData = this.updateData.bind(this);
         this.state = {
             modified: false,
-            asset: this.getAsset()
+            asset: this.getAsset(),
         };
     }
     getAsset() {
@@ -26,8 +26,8 @@ class BrewGridControlPanel extends Component {
     }
     updateData() {
         this.setState({
-            asset: this.getAsset()
-        })
+            asset: this.getAsset(),
+        });
     }
     back() {
         BrewGridActions.stopDataFlow();
@@ -39,11 +39,11 @@ class BrewGridControlPanel extends Component {
         console.log("cancel");
     }
     render() {
-        var asset = this.state.asset;
+        let asset = this.state.asset;
         if(asset == null) {
-            return(<div className="beagleBrewCP-container"></div>);
+            return <div className="beagleBrewCP-container"></div>;
         }
-        var assetData = asset.prop;
+        let assetData = asset.prop;
         const dataKeys = Object.keys(assetData);
         const cpContent = dataKeys.map((data, index) =>
             <Content dataName={data} data={assetData[data]} key={index} />
@@ -67,12 +67,12 @@ class Content extends Component {
     constructor() {
         super();
         this.state = {
-            modified: false
+            modified: false,
         };
     }
     render() {
-        var element;
-        var dataName = this.props.dataName;
+        let element;
+        let dataName = this.props.dataName;
 
         switch(dataName) {
             case "name":
@@ -98,19 +98,19 @@ class Input extends Component {
         super(props);
         this.state = {
             data: props.data,
-            currentData: props.data
-        }
+            currentData: props.data,
+        };
     }
 }
 
 class Switch extends Input {
     switchStuff() {
         this.setState({
-            currentData: !this.state.currentData
+            currentData: !this.state.currentData,
         });
     }
     render() {
-        var checked = this.state.currentData ? "checked" : "";
+        let checked = this.state.currentData ? "checked" : "";
         return(
             <label className={"switch " + checked}>
                 <input type="checkbox" checked={this.props.status} onChange={this.switchStuff.bind(this)}/>
@@ -152,7 +152,7 @@ class DefaultButton extends Component {
         const text = this.props.text;
 
         return(
-            <span className={"button " + classname} data-text={text} onClick={(e) => this.props.handler()}>&nbsp;</span>
+            <span className={"button " + classname} data-text={text} onClick={() => this.props.handler()}>&nbsp;</span>
         );
     }
 }

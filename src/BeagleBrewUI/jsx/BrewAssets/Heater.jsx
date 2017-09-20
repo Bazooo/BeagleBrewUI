@@ -1,5 +1,5 @@
-import React from 'react';
-import BrewAsset from './BrewAsset';
+import React from "react";
+import BrewAsset from "./BrewAsset";
 
 export default class Heater extends BrewAsset {
     getFluidClass() {

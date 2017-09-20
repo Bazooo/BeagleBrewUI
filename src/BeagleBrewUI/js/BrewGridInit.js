@@ -13,7 +13,7 @@ class BrewGridInit {
         return this.assetGrid.slice(0);
     }
     getTanks() {
-        console.log(this.tanks)
+        console.log(this.tanks);
         return this.tanks.slice(0);
     }
 
@@ -112,12 +112,12 @@ class BrewGridInit {
      * @param  {int}    y    Tank y position
      */
     placeInputOutput(data, x, y) {
-        var tubeY = data.y;
-        var tubeX = data.x;
-        var testY = tubeY - y;
-        var testX = tubeX - x;
+        let tubeY = data.y;
+        let tubeX = data.x;
+        let testY = tubeY - y;
+        let testX = tubeX - x;
 
-        var rotation = 0;
+        let rotation = 0;
         if(testX < 0) {
             // X left or middle
             if(tubeX < x) {
@@ -134,10 +134,10 @@ class BrewGridInit {
             }
         }
 
-        var assetData = {
+        let assetData = {
             assetId: "t1",
             rotation: rotation,
-            posTubing: -1
+            posTubing: -1,
         };
         this.changeAssetGridAt(tubeX - 1, tubeY - 1, assetData);
     }
@@ -147,14 +147,14 @@ class BrewGridInit {
      * @param  {Array} tubePath Pathing of a tube
      */
     placeTube(tubePath) {
-        for(var i = 1; i < tubePath.length; i++) {
-            var yDelta = tubePath[i].y - tubePath[i-1].y;
-            var xDelta = tubePath[i].x - tubePath[i-1].x;
+        for(let i = 1; i < tubePath.length; i++) {
+            let yDelta = tubePath[i].y - tubePath[i-1].y;
+            let xDelta = tubePath[i].x - tubePath[i-1].x;
 
-            var yLength = Math.abs(yDelta);
-            var xLength = Math.abs(xDelta);
-            var max = yLength;
-            var isVertical = true;
+            let yLength = Math.abs(yDelta);
+            let xLength = Math.abs(xDelta);
+            let max = yLength;
+            let isVertical = true;
             if(max === 0 && xLength !== 0) {
                 max = xLength;
                 isVertical = false;
@@ -164,12 +164,12 @@ class BrewGridInit {
                 return;
             }
 
-            for(var j = 0; j <= max; j++) {
-                var pos = isVertical ? yDelta : xDelta;
-                var oldPos = isVertical ? tubePath[i-1].y : tubePath[i-1].x;
-                var posDir = pos / Math.abs(pos);
+            for(let j = 0; j <= max; j++) {
+                let pos = isVertical ? yDelta : xDelta;
+                let oldPos = isVertical ? tubePath[i-1].y : tubePath[i-1].x;
+                let posDir = pos / Math.abs(pos);
                 pos = oldPos + j * posDir;
-                var posTubing = (j === 0 || j === max) ? 1 : 0;
+                let posTubing = (j === 0 || j === max) ? 1 : 0;
                 posTubing *= j === 0 ? -1 : 1;
                 if(isVertical) {
                     this.addTubePiece(pos, tubePath[i].x, posDir, isVertical, posTubing);
@@ -192,7 +192,7 @@ class BrewGridInit {
     addTubePiece(y, x, posDir, isVertical, posTubing) {
         y--;
         x--;
-        var asset = {};
+        let asset = {};
         asset.assetId = "t1";
         asset.posTubing = posTubing;
         asset.rotation = isVertical ? 90 : 0;
@@ -201,33 +201,33 @@ class BrewGridInit {
 
         this.redimensionGrid(x + 1, y + 1);
         if(this.assetGrid[y][x] != null) {
-            var gridData = this.assetGrid[y][x];
+            let gridData = this.assetGrid[y][x];
             switch(gridData.assetId) {
                 // Default
-                case "t1":
+                case "t1": {
                     // set tconnector
                     asset.assetId = "t3";
-                    var modRotation = asset.rotation + 180 * (1 - posTubing) / 2;
+                    let modRotation = asset.rotation + 180 * (1 - posTubing) / 2;
                     modRotation %= 360;
                     asset.rotation = 90 + modRotation;
                     asset.rotation %= 360;
                     if(posTubing) {
                         if(gridData.posTubing) {
                             // curved
-                            asset.assetId = "t2"
+                            asset.assetId = "t2";
                             switch(gridData.rotation + modRotation) {
                                 case 270:
-                                asset.rotation = gridData.rotation * modRotation ? 180 : 0;
-                                break;
+                                    asset.rotation = gridData.rotation * modRotation ? 180 : 0;
+                                    break;
                                 case 90:
-                                asset.rotation = 90;
-                                break;
+                                    asset.rotation = 90;
+                                    break;
                                 case 450:
-                                asset.rotation = 270;
-                                break;
+                                    asset.rotation = 270;
+                                    break;
                                 default:
-                                asset.rotation = 0;
-                                asset.assetId = "t1";
+                                    asset.rotation = 0;
+                                    asset.assetId = "t1";
                             }
                         }
                     } else {
@@ -237,6 +237,7 @@ class BrewGridInit {
                         }
                     }
                     break;
+                }
                 // Curved
                 case "t2":
                     break;
@@ -255,11 +256,11 @@ class BrewGridInit {
      * @param {Object} misc Misc data
      */
     addMiscAsset(misc) {
-        var x = misc.x - 1;
-        var y = misc.y - 1;
+        let x = misc.x - 1;
+        let y = misc.y - 1;
         this.redimensionGrid(x + 1, y + 1);
         if(this.assetGrid[y][x] === null) {
-            var asset = {};
+            let asset = {};
             asset.rotation = 0;
             this.changeAssetGridAt(x, y, asset);
         }
@@ -284,7 +285,7 @@ class BrewGridInit {
                     assetId: asset.assetId,
                     rotation: asset.rotation,
                     liquid: asset.liquid,
-                    open: asset.open
+                    open: asset.open,
                 };
                 cleanRow.push(cleanData);
             }
@@ -298,9 +299,9 @@ class BrewGridInit {
      * @param  {String} type Asset type
      * @return {Array}  Array of the specified type of asset
      */
-	filterAsset(type) {
-		return this.brewAssets.filter(obj => obj.type === type);
-	}
+    filterAsset(type) {
+        return this.brewAssets.filter(obj => obj.type === type);
+    }
 }
 
 export default BrewGridInit;

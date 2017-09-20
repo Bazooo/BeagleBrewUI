@@ -1,7 +1,7 @@
 import {EventEmitter} from "events";
-import dispatcher from '../../dispatcher';
-import * as CST from '../js/constants';
-import ObjectScraper from '../js/ObjectScraper'
+import dispatcher from "../../dispatcher";
+import * as CST from "../js/constants";
+import ObjectScraper from "../js/ObjectScraper";
 
 import brewAssets from "../../exampleDB/gridLayout.json";
 

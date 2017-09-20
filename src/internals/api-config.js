@@ -3,6 +3,6 @@
  */
 
 module.exports = {
-    ip:'localhost',
-    port: 12345
+    ip:"localhost",
+    port: 12345,
 };

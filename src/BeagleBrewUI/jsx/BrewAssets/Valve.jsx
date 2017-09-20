@@ -1,5 +1,5 @@
-import React from 'react';
-import BrewAssetToggle from './BrewAssetToggle';
+import React from "react";
+import BrewAssetToggle from "./BrewAssetToggle";
 
 export default class Valve extends BrewAssetToggle {
     render() {

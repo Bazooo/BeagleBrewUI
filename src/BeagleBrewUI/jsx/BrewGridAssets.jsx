@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import DefaultTube from './BrewAssets/DefaultTube';
-import CurvedTube from './BrewAssets/CurvedTube';
-import TConnectorTube from './BrewAssets/TConnectorTube';
-import IntersectionTube from './BrewAssets/IntersectionTube';
-import InputTube from './BrewAssets/InputTube';
-import OutputTube from './BrewAssets/OutputTube';
-import Coil from './BrewAssets/Coil';
-import Heater from './BrewAssets/Heater';
-import Cooler from './BrewAssets/Cooler';
-import Pump from './BrewAssets/Pump';
-import Valve from './BrewAssets/Valve';
-import Shower from './BrewAssets/Shower';
+import React, {Component} from "react";
+import DefaultTube from "./BrewAssets/DefaultTube";
+import CurvedTube from "./BrewAssets/CurvedTube";
+import TConnectorTube from "./BrewAssets/TConnectorTube";
+import IntersectionTube from "./BrewAssets/IntersectionTube";
+import InputTube from "./BrewAssets/InputTube";
+import OutputTube from "./BrewAssets/OutputTube";
+import Coil from "./BrewAssets/Coil";
+import Heater from "./BrewAssets/Heater";
+import Cooler from "./BrewAssets/Cooler";
+import Pump from "./BrewAssets/Pump";
+import Valve from "./BrewAssets/Valve";
+import Shower from "./BrewAssets/Shower";
 
 export default class BrewAssetSquare extends Component {
     render() {

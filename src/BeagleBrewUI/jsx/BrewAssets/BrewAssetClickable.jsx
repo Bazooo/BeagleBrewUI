@@ -1,6 +1,6 @@
-import React from 'react';
-import * as BrewGridActions from '../../actions/BrewGridActions';
-import BrewAsset from './BrewAsset';
+import React from "react";
+import * as BrewGridActions from "../../actions/BrewGridActions";
+import BrewAsset from "./BrewAsset";
 
 export default class BrewAssetClickable extends BrewAsset {
     constructor(props) {
@@ -10,7 +10,7 @@ export default class BrewAssetClickable extends BrewAsset {
         this.state = {
             data: props.data,
             active: false,
-            flowingData: false
+            flowingData: false,
         };
     }
 

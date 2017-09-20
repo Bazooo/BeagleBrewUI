@@ -1,5 +1,5 @@
-import React from 'react';
-import BrewAssetClickable from './BrewAssetClickable';
+import React from "react";
+import BrewAssetClickable from "./BrewAssetClickable";
 
 export default class Tank extends BrewAssetClickable {
     getAssetStatusClass() {
@@ -7,14 +7,14 @@ export default class Tank extends BrewAssetClickable {
     }
     render() {
         const assetClass = "tank";
-        var grid = this.props.grid;
-        var data = this.props.data;
+        let grid = this.props.grid;
+        let data = this.props.data;
         const width = 100 / grid.width * data.width;
         const height = 100 / grid.height * data.height;
         const x = "calc((100%/" + grid.width + "*" + data.x + ") - 5px)";
         const y = "calc((100%/" + grid.height + "*" + data.y + ") - 5px)";
 
-        var assetCode =
+        let assetCode =
             <div className="tank">
                 <span className="fluid" data-temp={this.props.data.prop.currentTemp}></span>
             </div>;
