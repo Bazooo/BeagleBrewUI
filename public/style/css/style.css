@@ -609,6 +609,18 @@ div.beagleBrewGrid > div.beagleBrewGrid-container .clickable {
 	cursor: pointer;
 }
 
+div.beagleBrewGrid > div.beagleBrewGrid-container .clickable::before {
+	content: attr(data-id);
+	display: inline-block;
+	position: absolute;
+	color: #ecf0f1;
+	background: rgba(44, 62, 80, 0.8);
+	font-size: 12px;
+	padding: 3px;
+	bottom: 100%;
+	z-index: 999;
+}
+
 div.beagleBrewGrid > div.beagleBrewGrid-container div.beagleBrewGrid-assets {
 	width: 100%;
 	position: relative;
@@ -781,15 +793,15 @@ div.beagleBrewGrid div.openControlPanel div.beagleBrewGrid-container {
 	stroke-linecap: round;
 }
 
-.brew-asset.r90 {
+.brew-asset.r90 > * {
 	transform: rotate(90deg);
 }
 
-.brew-asset.r180 {
+.brew-asset.r180 > * {
 	transform: rotate(180deg);
 }
 
-.brew-asset.r270 {
+.brew-asset.r270 > * {
 	transform: rotate(270deg);
 }
 
@@ -909,6 +921,11 @@ div.beagleBrewGrid div.openControlPanel div.beagleBrewGrid-container {
 
 .brew-asset.pump.active .pump-icon {
 	animation-play-state: running;
+}
+
+.brew-asset.valve > div {
+	width: 100%;
+	height: 100%;
 }
 
 .brew-asset.valve .valve-icon {

@@ -1,7 +1,7 @@
 import {EventEmitter} from "events";
-import dispatcher from '../../dispatcher';
-import * as CST from '../js/constants';
-import ObjectScraper from '../js/ObjectScraper'
+import dispatcher from "../../dispatcher";
+import * as CST from "../js/constants";
+import ObjectScraper from "../js/ObjectScraper";
 
 import brewAssets from "../../exampleDB/gridLayout.json";
 
@@ -15,7 +15,6 @@ class BrewGridStore extends EventEmitter {
         this.assetStatus = exampleStatus; // Will be updated by the server
 
         this.tankGrid = null;
-        this.dataFlow = null;
         this.activeAsset = null;
 
         //Create socket if not already created
@@ -30,22 +29,51 @@ class BrewGridStore extends EventEmitter {
         this.emit("change");
     }
 
-    startDataFlow(asset) {
-        if (this.dataFlow === null) {
-            // asset.startDataFlow();
-            this.activeAsset = asset;
-            this.flowData(asset.state.data);
-            this.emit("Toggle Control Panel");
+    flowData() {
+        if (this.activeAsset !== null) {
+            this.emit("Flowing Data");
         }
     }
 
-    toggleAsset(id) {
+    startDataFlow(id) {
+        if (this.activeAsset === null) {
+            this.activeAsset = ObjectScraper.scrape(this.assetStatus, "id", id);
+
+            this.emit("Toggle Control Panel");
+            this.flowData();
+        }
+    }
+
+    stopDataFlow() {
+        this.activeAsset = null;
+        this.emit("Toggle Control Panel");
+    }
+
+    changeTemp(id, key, event) {
+        let result = ObjectScraper.scrape(this.assetStatus, "id", id);
+        let data = result.data;
+        //emit to client
+        data[key] = event.target.value;
+
+        //emit to server
+        switch (result.parent) {
+            case "Tanks":
+                this.socket.updateTank(id, data.setTemp, data.controllerStatus);
+                break;
+        }
+        this.emit("change");
+    }
+
+    toggleAsset(id, key, event) {
         // check asset status in this.assetStatus
         let result = ObjectScraper.scrape(this.assetStatus, "id", id);
         let state = result.data;
         // toggle status
-        state.status = state.status ? 0 : 1;
-        
+        if (!key || !event)
+            state.status = state.status ? 0 : 1;
+        else if (key === "status" && event)
+            state.status = parseInt(event.target.value);
+        console.log(state.status);
         // emit to server for supported toggle assets
         switch (result.parent) {
             case "Valves":
@@ -54,8 +82,9 @@ class BrewGridStore extends EventEmitter {
             case "Pumps":
                 this.socket.updatePump(id, state.status);
                 break;
+            default:
         }
-
+        this.flowData();
         // emit to UI client
         this.emit("change");
     }
@@ -71,22 +100,22 @@ class BrewGridStore extends EventEmitter {
         return clone;
     }
 
-    // getAssetGrid() {
-    //     return this.assetGrid;
-    // }
-
     getDataFlow() {
-        return this.dataFlow;
+        return this.activeAsset;
     }
-
 
     // Handlers
     handleActions(action) {
-        // debugger;
         switch (action.type) {
             // case CST.INIT_GRID:
             //     this.initializeGrid(action.assetGrid, action.tankGrid);
             //     break;
+            case CST.REQUEST_DATAFLOW:
+                this.startDataFlow(action.id);
+                break;
+            case CST.STOP_DATAFLOW:
+                this.stopDataFlow();
+                break;
             case CST.CHANGE_DATA:
                 //TODO: Is this still necessary?
                 this.changeData(action.data);
@@ -96,7 +125,10 @@ class BrewGridStore extends EventEmitter {
                 this.emit("change");
                 break;
             case CST.TOGGLE_ASSET:
-                this.toggleAsset(action.id);
+                this.toggleAsset(action.id, action.key, action.event);
+                break;
+            case CST.CHANGE_TEMP:
+                this.changeTemp(action.id, action.key, action.event);
                 break;
             default:
         }

@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import BrewGridStore from '../stores/BrewGridStore';
-import * as BrewGridActions from '../actions/BrewGridActions';
-import variables from "../../exampleDB/controlPanelVariables.json";
+import React, {Component} from "react";
+import BrewGridStore from "../stores/BrewGridStore";
+import * as BrewGridActions from "../actions/BrewGridActions";
+import variables from "../../exampleDB/units.json";
+import LayoutManager from "./Panel/LayoutManager.js";
 
 class BrewGridControlPanel extends Component {
     constructor(props) {
@@ -12,51 +13,63 @@ class BrewGridControlPanel extends Component {
         this.updateData = this.updateData.bind(this);
         this.state = {
             modified: false,
-            asset: this.getAsset()
+            asset: this.getAsset(),
         };
     }
+
     getAsset() {
         return BrewGridStore.getDataFlow();
     }
+
     componentWillMount() {
         BrewGridStore.on("Flowing Data", this.updateData);
     }
+
     componentWillUnmount() {
         BrewGridStore.removeListener("Flowing Data", this.updateData);
     }
+
     updateData() {
         this.setState({
-            asset: this.getAsset()
-        })
+            asset: BrewGridStore.getDataFlow(),
+        });
+        //TODO: use this.state.asset rather than props
     }
+
     back() {
         BrewGridActions.stopDataFlow();
     }
+
     confirm() {
         console.log("confirm");
     }
+
     cancel() {
         console.log("cancel");
     }
+
     render() {
-        var asset = this.state.asset;
-        if(asset == null) {
-            return(<div className="beagleBrewCP-container"></div>);
+        let asset = this.state.asset;
+        if (asset == null) {
+            return (<div className="beagleBrewCP-container"></div>);
         }
-        var assetData = asset.prop;
-        const dataKeys = Object.keys(assetData);
+        let assetData = asset.data;
+        let type = asset.parent;
+        let layout = LayoutManager.getLayout(type);
+        const dataKeys = Object.keys(layout.cols);
         const cpContent = dataKeys.map((data, index) =>
-            <Content dataName={data} data={assetData[data]} key={index} />
+            <Content type={type} val={assetData[data]} layout={layout.cols[data]} id={assetData.id} key={index}
+                rKey={data}/>
         );
-        return(
+        return (
             <div className="beagleBrewCP-container">
                 <DefaultButton classname="back" text="back" handler={this.back}/>
                 <div className="beagleBrewCP-contents">
                     {cpContent}
                 </div>
                 <div className="beagleBrewCP-confirmation">
-                    <DefaultButton classname="confirm" text="confirm" handler={this.confirm} />
-                    <DefaultButton classname="cancel" text="cancel" handler={this.cancel} />
+                    <DefaultButton classname="confirm" text="confirm" handler={this.confirm}/>
+                    <DefaultButton classname="cancel" text="cancel" handler={this.cancel}/>
                 </div>
             </div>
         );
@@ -64,28 +77,17 @@ class BrewGridControlPanel extends Component {
 }
 
 class Content extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            modified: false
+            modified: false,
         };
+
     }
+
     render() {
-        var element;
-        var dataName = this.props.dataName;
-
-        switch(dataName) {
-            case "name":
-                element = <Name name={this.props.data} />;
-                break;
-            case "active":
-                element = <Switch data={this.props.data} />;
-                break;
-            default:
-                element = <DefaultContent dataName={dataName} data={this.props.data} />;
-        }
-
-        return(
+        let element = LayoutManager.getInput(this.props.layout, this.props.val, this.props.id, this.props.rKey);
+        return (
             <div className="beagleBrewCP-content">
                 {element}
             </div>
@@ -98,19 +100,20 @@ class Input extends Component {
         super(props);
         this.state = {
             data: props.data,
-            currentData: props.data
-        }
+            currentData: props.data,
+        };
     }
 }
 
 class Switch extends Input {
     switchStuff() {
         this.setState({
-            currentData: !this.state.currentData
+            currentData: !this.state.currentData,
         });
     }
+
     render() {
-        var checked = this.state.currentData ? "checked" : "";
+        let checked = this.state.currentData ? "checked" : "";
         return(
             <label className={"switch " + checked}>
                 <input type="checkbox" checked={this.props.status} onChange={this.switchStuff.bind(this)}/>
@@ -121,7 +124,7 @@ class Switch extends Input {
 
 class Name extends Component {
     render() {
-        return(
+        return (
             <div>
                 <span className="asset-name">{this.props.name}</span>
             </div>
@@ -134,10 +137,10 @@ class DefaultContent extends Component {
         //TODO: Bind columns to unit classes
         const dataName = this.props.dataName;
         let unit = "";
-        if(dataName in variables) {
+        if (dataName in variables) {
             unit = variables[dataName];
         }
-        return(
+        return (
             <div>
                 <span className="content-title">{dataName}</span>
                 <span className="content-data" data-unit={unit}>{this.props.data}</span>
@@ -152,7 +155,7 @@ class DefaultButton extends Component {
         const text = this.props.text;
 
         return(
-            <span className={"button " + classname} data-text={text} onClick={(e) => this.props.handler()}>&nbsp;</span>
+            <span className={"button " + classname} data-text={text} onClick={() => this.props.handler()}>&nbsp;</span>
         );
     }
 }
