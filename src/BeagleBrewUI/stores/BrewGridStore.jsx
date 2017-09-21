@@ -31,6 +31,7 @@ class BrewGridStore extends EventEmitter {
 
     flowData() {
         if (this.activeAsset !== null) {
+            this.updateActiveAsset();
             this.emit("Flowing Data");
         }
     }
@@ -60,7 +61,9 @@ class BrewGridStore extends EventEmitter {
             case "Tanks":
                 this.socket.updateTank(id, data.setTemp, data.controllerStatus);
                 break;
+            default:
         }
+        this.flowData();
         this.emit("change");
     }
 
@@ -72,7 +75,7 @@ class BrewGridStore extends EventEmitter {
         if (!key || !value)
             state.status = state.status ? 0 : 1;
         else if (key === "status" && value)
-            state.status = parseInt(value);
+            state.status = Number.parseInt(value, 10);
         // emit to server for supported toggle assets
         switch (result.parent) {
             case "Valves":
@@ -99,6 +102,11 @@ class BrewGridStore extends EventEmitter {
         return clone;
     }
 
+    updateActiveAsset() {
+        const id = this.activeAsset.data.id;
+        this.activeAsset = ObjectScraper.scrape(this.assetStatus, "id", id);
+    }
+
     getDataFlow() {
         return this.activeAsset;
     }
@@ -122,6 +130,7 @@ class BrewGridStore extends EventEmitter {
             case CST.CHANGE_STATES:
                 this.assetStatus = action.data;
                 this.emit("change");
+                this.flowData();
                 break;
             case CST.TOGGLE_ASSET:
                 this.toggleAsset(action.id, action.key, action.value);

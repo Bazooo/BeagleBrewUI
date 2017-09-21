@@ -250,7 +250,9 @@ class FluidSimulation {
                 fluid.moveUp();
         }
         if(point.y === fluid.y && point.x === fluid.x) {
-            throw "Cannot reach this point" + point;
+            // throw "Cannot reach this point" + point;
+            // TODO throw error
+            return;
         }
         assetFluid.liquid = fluid.liquid;
         assetFluid.fluid = fluidState;

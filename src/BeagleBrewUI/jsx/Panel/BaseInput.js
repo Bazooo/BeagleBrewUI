@@ -9,6 +9,13 @@ class BaseInput extends Component {
         });
     }
 
+    componentWillReceiveProps(props) {
+        // console.log(props)
+        this.setState({
+            val: props.val,
+        });
+    }
+
     throwError() {
         alert("A not coded error message should appear");
     }
@@ -30,6 +37,7 @@ class BaseInput extends Component {
                         val: value,
                     });
                     this.props.layout.onChange(this.props.id,this.props.rKey, value);
+                    this.forceUpdate();
                 } else {
                     this.throwError();
                 }
