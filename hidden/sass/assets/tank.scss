@@ -18,7 +18,7 @@
     height: 100%;
     position: relative;
 
-    &:hover {
+    &.fluid {
         &>span.fluid {
             height: 70%;
 
@@ -32,18 +32,21 @@
     &>span.fluid {
         width: 100%;
         height: 0%;
+        height: 70%; // FIXME remove that
         transition: height 500ms;
         color: $color-basic;
         position: absolute;
         bottom: 0;
         $size: 25px;
         font-size: $size;
+        background: $color-active-1; // FIXME remove that
 
 
         &::before {
             content: attr(data-temp);
             transition: opacity 250ms;
             opacity: 0;
+            opacity: 1; // FIXME remove that
             position: absolute;
             padding: 0 10px;
             right: 100%;

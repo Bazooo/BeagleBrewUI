@@ -5,6 +5,6 @@ export default {
         "unitType": "",
         "enumKeys": [],
         "enumVals": "_=enumKeys",
-        "label": "_name"
-    }
+        "label": "_name",
+    },
 };

@@ -49,11 +49,11 @@ class BrewGridStore extends EventEmitter {
         this.emit("Toggle Control Panel");
     }
 
-    changeTemp(id, key, event) {
+    changeTemp(id, key, value) {
         let result = ObjectScraper.scrape(this.assetStatus, "id", id);
         let data = result.data;
         //emit to client
-        data[key] = event.target.value;
+        data[key] = Number.parseFloat(value);
 
         //emit to server
         switch (result.parent) {
@@ -64,16 +64,15 @@ class BrewGridStore extends EventEmitter {
         this.emit("change");
     }
 
-    toggleAsset(id, key, event) {
+    toggleAsset(id, key, value) {
         // check asset status in this.assetStatus
         let result = ObjectScraper.scrape(this.assetStatus, "id", id);
         let state = result.data;
         // toggle status
-        if (!key || !event)
+        if (!key || !value)
             state.status = state.status ? 0 : 1;
-        else if (key === "status" && event)
-            state.status = parseInt(event.target.value);
-        console.log(state.status);
+        else if (key === "status" && value)
+            state.status = parseInt(value);
         // emit to server for supported toggle assets
         switch (result.parent) {
             case "Valves":
@@ -125,10 +124,10 @@ class BrewGridStore extends EventEmitter {
                 this.emit("change");
                 break;
             case CST.TOGGLE_ASSET:
-                this.toggleAsset(action.id, action.key, action.event);
+                this.toggleAsset(action.id, action.key, action.value);
                 break;
             case CST.CHANGE_TEMP:
-                this.changeTemp(action.id, action.key, action.event);
+                this.changeTemp(action.id, action.key, action.value);
                 break;
             default:
         }

@@ -1,16 +1,39 @@
-import React, {Component} from 'react';
-import BrewGridStore from "../../stores/BrewGridStore";
-
+import {Component} from "react";
 
 class BaseInput extends Component {
 
     constructor(props) {
         super(props);
+        this.state = ({
+            val: props.val,
+        });
     }
 
-    onChange(event) {
+    throwError() {
+        alert("A not coded error message should appear");
+    }
+
+    /**
+     * Checks if there is an error with the value
+     * @param   {Val}       val     Value to check
+     * @return  {boolean}           True if no error
+     */
+    checkErrors() {
+        return true;
+    }
+
+    emitChange(value) {
         if (this.props.layout.onChange && typeof this.props.layout.onChange === "function") {
-            this.props.layout.onChange(this.props.id,this.props.rKey, event);
+            if (value.toString() !== this.state.val.toString()) {
+                if(this.checkErrors(value)) {
+                    this.setState({
+                        val: value,
+                    });
+                    this.props.layout.onChange(this.props.id,this.props.rKey, value);
+                } else {
+                    this.throwError();
+                }
+            }
         }
     }
 

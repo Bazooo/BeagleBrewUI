@@ -20,11 +20,8 @@
         "currentTemp": 40,
         "setTemp": 0
     }, {
-        "controllerStatus": 0,
         "sensorStatus": 1,
-        "id": "Cuve3",
-        "currentTemp": 40,
-        "setTemp": 0
+        "id": "Cuve3"
     }],
     "Valves": [{
         "status": 0,

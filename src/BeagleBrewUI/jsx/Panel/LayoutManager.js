@@ -1,8 +1,8 @@
-import Tanks from '../../layouts/Tanks.js';
-import Pumps from '../../layouts/Pumps.js';
-import Valves from '../../layouts/Valves.js';
-import defaults from '../../layouts/defaults.js';
-import * as React from "react";
+import Tanks from "../../layouts/Tanks.js";
+import Pumps from "../../layouts/Pumps.js";
+import Valves from "../../layouts/Valves.js";
+import defaults from "../../layouts/defaults.js";
+import React from "react";
 import NumberInput from "./NumberInput";
 import EnumInput from "./EnumInput";
 import StringInput from "./StringInput";
@@ -47,7 +47,7 @@ class LayoutParser {
      */
     parseColLayout(obj, layout, indexKey) {
         let specialVal = {
-            _name: indexKey
+            _name: indexKey,
         };
 
         let parseCodes = {};
@@ -57,9 +57,9 @@ class LayoutParser {
                 if (obj[k])
                     continue;
                 let v = layout[k];
-                if ((v + '').startsWith('_='))
+                if ((v + "").startsWith("_="))
                     parseCodes[k] = v.substr(2);
-                else if ((v + '').startsWith('_'))
+                else if ((v + "").startsWith("_"))
                     obj[k] = specialVal[v];
                 else
                     obj[k] = v;

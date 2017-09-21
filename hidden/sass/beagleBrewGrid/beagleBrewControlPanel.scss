@@ -73,6 +73,7 @@ div.beagleBrewCP {
                     display: flex;
                 }
             }
+
             div.beagleBrewCP-content {
                 padding: 20px;
                 display: flex;
@@ -86,64 +87,22 @@ div.beagleBrewCP {
                     text-transform: capitalize;
                 }
 
-                span.content-data {
-                    font-size: 2.5em;
+                .content-data {
+                    font-size: 1.3em;
+                    outline: none;
 
-                    &:after {
-                        font-size: 0.6em;
+                    &::before {
+                        content: attr(data-label);
+                    }
+
+                    &::after {
                         content: attr(data-unit);
                     }
-                }
 
-                label.switch {
-                    position: relative;
-                    width: 100px;
-                    height: 50px;
-                    cursor: pointer;
 
-                    input {
-                        display: none;
-                    }
 
-                    &:before,
-                    &:after {
-                        top: 0;
-                        display: flex;
-                        position: absolute;
-                        height: 40px;
-                        box-sizing: border-box;
-                    }
-
-                    &:before {
-                        content: 'OFF';
-                        background: $color-cpRed;
-                        width: 100px;
-                        transition: background 250ms;
-                        font-family: Raleway;
-                        font-weight: bold;
-                        color: $color-cpText;
-                        padding: 10px;
-                        align-items: center;
-                    }
-                    &:after {
-                        content: '';
-                        transition: right 250ms;
-                        width: 50px;
-                        right: 0;
-                        background-color: $color-cpText;
-                    }
-
-                    &.checked {
-                        &:before {
-                            content: 'ON';
-                            background: $color-cpGreen;
-                            justify-content: flex-end;
-                        }
-
-                        &:after {
-                            right: 50%;
-                        }
-                    }
+                    @import "./ControlPanelContents/enumInput";
+                    @import "./ControlPanelContents/textInput";
                 }
             }
         }

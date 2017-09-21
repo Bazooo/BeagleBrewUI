@@ -95,60 +95,60 @@ class Content extends Component {
     }
 }
 
-class Input extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: props.data,
-            currentData: props.data,
-        };
-    }
-}
+// class Input extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             data: props.data,
+//             currentData: props.data,
+//         };
+//     }
+// }
 
-class Switch extends Input {
-    switchStuff() {
-        this.setState({
-            currentData: !this.state.currentData,
-        });
-    }
+// class Switch extends Input {
+//     switchStuff() {
+//         this.setState({
+//             currentData: !this.state.currentData,
+//         });
+//     }
+//
+//     render() {
+//         let checked = this.state.currentData ? "checked" : "";
+//         return(
+//             <label className={"switch " + checked}>
+//                 <input type="checkbox" checked={this.props.status} onChange={this.switchStuff.bind(this)}/>
+//             </label>
+//         );
+//     }
+// }
 
-    render() {
-        let checked = this.state.currentData ? "checked" : "";
-        return(
-            <label className={"switch " + checked}>
-                <input type="checkbox" checked={this.props.status} onChange={this.switchStuff.bind(this)}/>
-            </label>
-        );
-    }
-}
-
-class Name extends Component {
-    render() {
-        return (
-            <div>
-                <span className="asset-name">{this.props.name}</span>
-            </div>
-        );
-    }
-}
-
-class DefaultContent extends Component {
-    render() {
-        //TODO: Bind columns to unit classes
-        const dataName = this.props.dataName;
-        let unit = "";
-        if (dataName in variables) {
-            unit = variables[dataName];
-        }
-        return (
-            <div>
-                <span className="content-title">{dataName}</span>
-                <span className="content-data" data-unit={unit}>{this.props.data}</span>
-            </div>
-        );
-    }
-}
-
+// class Name extends Component {
+//     render() {
+//         return (
+//             <div>
+//                 <span className="asset-name">{this.props.name}</span>
+//             </div>
+//         );
+//     }
+// }
+//
+// class DefaultContent extends Component {
+//     render() {
+//         //TODO: Bind columns to unit classes
+//         const dataName = this.props.dataName;
+//         let unit = "";
+//         if (dataName in variables) {
+//             unit = variables[dataName];
+//         }
+//         return (
+//             <div>
+//                 <span className="content-title">{dataName}</span>
+//                 <span className="content-data" data-unit={unit}>{this.props.data}</span>
+//             </div>
+//         );
+//     }
+// }
+//
 class DefaultButton extends Component {
     render() {
         const classname = this.props.classname;
