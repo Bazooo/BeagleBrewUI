@@ -16,7 +16,11 @@ export default class Tank extends BrewAssetClickable {
 
         let assetCode =
             <div className="tank">
-                <span className="fluid" data-temp={this.props.status.currentTemp}></span>
+                <div className="labels">
+                    <span className="currentTemp">{this.props.status.currentTemp}</span>
+                    <span className="setTemp">{this.props.status.setTemp}</span>
+                </div>
+                <span className="fluid"></span>
             </div>;
 
         return (
