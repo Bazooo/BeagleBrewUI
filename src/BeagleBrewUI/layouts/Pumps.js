@@ -1,4 +1,4 @@
-import * as BrewGridStore from "../actions/BrewGridActions";
+import * as BrewGridActions from "../actions/BrewGridActions";
 
 export default {
     cols: {
@@ -8,16 +8,16 @@ export default {
             enumKeys: [
                 -1,
                 0,
-                1
+                1,
             ],
             enumVals: [
                 "Erreur",
                 "Fermé",
-                "Ouvert"
+                "Ouvert",
             ],
             editable: true,
-            onChange: BrewGridStore.toggleAsset.bind(BrewGridStore),
-            label: "Status: "
-        }
-    }
+            onChange: BrewGridActions.toggleAsset.bind(BrewGridActions),
+            label: "Status: ",
+        },
+    },
 };

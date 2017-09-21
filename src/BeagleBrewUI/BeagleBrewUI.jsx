@@ -4,6 +4,9 @@ import BrewGridControlPanel from "./jsx/BrewGridControlPanel";
 import BrewAssetSquare from "./jsx/BrewGridAssets";
 import Tank from "./jsx/BrewAssets/Tank";
 
+// Globals
+import ObjectScraper from "./js/ObjectScraper";
+
 // Brew Grid logic
 import BrewGridInit from "./js/BrewGridInit.js";
 import FluidSimulation from "./js/FluidSimulation.js";
@@ -112,9 +115,14 @@ class BrewGrid extends Component {
             width: assetGrid[0].length,
             height: assetGrid.length,
         };
-        const tanksComponents = tankGrid.map((data, index) =>
-            <Tank grid={gridDimensions} data={data} key={index}/>
-        );
+        let status = BrewGridStore.getAssetStatus();
+        const tanksComponents =
+            tankGrid.map(
+                (data, index) => {
+                    let tankState = ObjectScraper.scrape(status, "id", data.id).data;
+                    return <Tank grid={gridDimensions} data={data} key={index} status={tankState} />;
+                }
+            );
 
         let toggleCPClass = this.state.showCP ? "openControlPanel" : "";
 
