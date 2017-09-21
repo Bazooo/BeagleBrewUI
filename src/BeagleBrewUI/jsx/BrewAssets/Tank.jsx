@@ -21,6 +21,7 @@ export default class Tank extends BrewAssetClickable {
                     <span className="setTemp">{this.props.status.setTemp}</span>
                 </div>
                 <span className="fluid"></span>
+
             </div>;
 
         return (
