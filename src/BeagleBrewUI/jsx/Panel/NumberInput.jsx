@@ -1,23 +1,13 @@
-import BaseInput from "./BaseInput";
-import * as React from "react";
-import units from '../../../exampleDB/units.json';
+import TextInput from "./TextInput";
 
-class NumberInput extends BaseInput {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        let unit = units[this.props.layout.unitType];
-        return (
-            <div>
-                <label htmlFor="">{this.props.layout.label}</label>
-                <span className="content-data" data-unit={unit}>
-                    <input id="" type="number" value={this.props.val}
-                           onChange={this.onChange.bind(this)} disabled={!this.props.layout.editable}/>
-                </span>
-            </div>
-        );
+class NumberInput extends TextInput {
+    /**
+     * Checks if there is an error with the value
+     * @param   {Val}       val     Value to check
+     * @return  {boolean}           True if no error
+     */
+    checkErrors(val) {
+        return (/^\d+$/).test(val);
     }
 }
 

@@ -1,0 +1,8 @@
+// main: ../beagleBrewControlPanel.scss
+
+&.text-input {
+    &[contentEditable] {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

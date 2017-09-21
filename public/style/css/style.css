@@ -525,62 +525,54 @@ div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagle
 	text-transform: capitalize;
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content span.content-data {
-	font-size: 2.5em;
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data {
+	font-size: 1.3em;
+	outline: none;
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content span.content-data:after {
-	font-size: 0.6em;
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data::before {
+	content: attr(data-label);
+}
+
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data::after {
 	content: attr(data-unit);
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch {
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input {
+	background: #6c7a89;
 	position: relative;
-	width: 100px;
-	height: 50px;
 	cursor: pointer;
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch input {
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input div.options-container {
+	position: absolute;
 	display: none;
+	background: #6c7a89;
+	width: 100%;
+	flex-direction: column;
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch:before, div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch:after {
-	top: 0;
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input div.options-container > span.option {
+	width: 100%;
+}
+
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input div.options-container > span.option:hover {
+	background: #abb7b7;
+}
+
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input.open {
+	background: #abb7b7;
+}
+
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input.open div.options-container {
 	display: flex;
 	position: absolute;
-	height: 40px;
-	box-sizing: border-box;
+	background: #6c7a89;
 }
 
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch:before {
-	content: 'OFF';
-	background: #d24d57;
-	width: 100px;
-	transition: background 250ms;
-	font-family: Raleway;
-	font-weight: bold;
-	color: #ecf0f1;
-	padding: 10px;
-	align-items: center;
-}
-
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch:after {
-	content: '';
-	transition: right 250ms;
-	width: 50px;
-	right: 0;
-	background-color: #ecf0f1;
-}
-
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch.checked:before {
-	content: 'ON';
-	background: #2ecc71;
-	justify-content: flex-end;
-}
-
-div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content label.switch.checked:after {
-	right: 50%;
+div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.text-input[contentEditable] {
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-confirmation {
@@ -825,28 +817,31 @@ div.beagleBrewGrid div.openControlPanel div.beagleBrewGrid-container {
 	position: relative;
 }
 
-.brew-asset .tank:hover > span.fluid {
+.brew-asset .tank.fluid > span.fluid {
 	height: 70%;
 }
 
-.brew-asset .tank:hover > span.fluid::before {
+.brew-asset .tank.fluid > span.fluid::before {
 	opacity: 1;
 }
 
 .brew-asset .tank > span.fluid {
 	width: 100%;
 	height: 0%;
+	height: 70%;
 	transition: height 500ms;
 	color: #ecf0f1;
 	position: absolute;
 	bottom: 0;
 	font-size: 25px;
+	background: #19b5fe;
 }
 
 .brew-asset .tank > span.fluid::before {
 	content: attr(data-temp);
 	transition: opacity 250ms;
 	opacity: 0;
+	opacity: 1;
 	position: absolute;
 	padding: 0 10px;
 	right: 100%;

@@ -1,0 +1,33 @@
+// main: ../beagleBrewControlPanel.scss
+
+&.enum-input {
+    background: $gray-lynch;
+    position: relative;
+    cursor: pointer;
+
+    div.options-container {
+        position: absolute;
+        display: none;
+        background: $gray-lynch;
+        width: 100%;
+        flex-direction: column;
+
+        &>span.option {
+            width: 100%;
+
+            &:hover {
+                background: $gray-edward;
+            }
+        }
+    }
+
+    &.open {
+        background: $gray-edward;
+        div.options-container {
+            display: flex;
+            position: absolute;
+            background: $gray-lynch;
+
+        }
+    }
+}

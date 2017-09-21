@@ -8,6 +8,5 @@ export default class BrewAssetToggle extends BrewAssetClickable {
     clickHandler() {
         let data = this.props.data;
         BrewGridActions.toggleAsset(data.id);
-        BrewGridActions.requestDataFlow(data.id);
     }
 }
