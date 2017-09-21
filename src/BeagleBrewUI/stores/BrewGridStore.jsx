@@ -31,6 +31,7 @@ class BrewGridStore extends EventEmitter {
 
     flowData() {
         if (this.activeAsset !== null) {
+            this.updateActiveAsset();
             this.emit("Flowing Data");
         }
     }
@@ -62,6 +63,7 @@ class BrewGridStore extends EventEmitter {
                 break;
             default:
         }
+        this.flowData();
         this.emit("change");
     }
 
@@ -100,6 +102,11 @@ class BrewGridStore extends EventEmitter {
         return clone;
     }
 
+    updateActiveAsset() {
+        const id = this.activeAsset.data.id;
+        this.activeAsset = ObjectScraper.scrape(this.assetStatus, "id", id);
+    }
+
     getDataFlow() {
         return this.activeAsset;
     }
@@ -123,6 +130,7 @@ class BrewGridStore extends EventEmitter {
             case CST.CHANGE_STATES:
                 this.assetStatus = action.data;
                 this.emit("change");
+                this.flowData();
                 break;
             case CST.TOGGLE_ASSET:
                 this.toggleAsset(action.id, action.key, action.value);

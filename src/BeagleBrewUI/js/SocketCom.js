@@ -126,7 +126,7 @@ class SocketCom {
     updateTank(id, temp, controllerStatus) {
         this.socket.emit("change tank temp", {
             id: id,
-            temp: temp,
+            setTemp: temp,
             controllerStatus: controllerStatus,
         });
     }
