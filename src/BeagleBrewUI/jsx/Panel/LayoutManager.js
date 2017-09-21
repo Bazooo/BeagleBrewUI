@@ -13,6 +13,12 @@ class LayoutParser {
         let defCols = defaults.cols;
         let layouts = [Tanks, Pumps, Valves];
         for (let lay of layouts) {
+            //Merge config
+            if (!lay.cfg)
+                lay.cfg = {};
+            lay.cfg = Object.assign({}, defaults.cfg, lay.cfg);
+
+            //Merge cols
             let layCols = lay.cols;
             for (let c in layCols)
                 if (layCols.hasOwnProperty(c)) {

@@ -56,7 +56,13 @@ class BrewGridControlPanel extends Component {
         let assetData = asset.data;
         let type = asset.parent;
         let layout = LayoutManager.getLayout(type);
-        const dataKeys = Object.keys(layout.cols);
+        let dataKeys = Object.keys(layout.cols);
+
+        if (layout.cfg.skipEmptyData)
+            dataKeys = dataKeys.filter(function (key) {
+                return !(assetData[key] == null || assetData[key].length === 0);
+            });
+
         const cpContent = dataKeys.map((data, index) =>
             <Content type={type} val={assetData[data]} layout={layout.cols[data]} id={assetData.id} key={index}
                 rKey={data}/>
@@ -154,7 +160,7 @@ class DefaultButton extends Component {
         const classname = this.props.classname;
         const text = this.props.text;
 
-        return(
+        return (
             <span className={"button " + classname} data-text={text} onClick={() => this.props.handler()}>&nbsp;</span>
         );
     }

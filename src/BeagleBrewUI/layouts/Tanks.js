@@ -1,6 +1,9 @@
 import * as BrewGridActions from "../actions/BrewGridActions";
 
 export default {
+    cfg: {
+        skipEmptyData: true,
+    },
     cols: {
         id: {label: "Id: "},
         sensorStatus: {
