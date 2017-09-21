@@ -60,6 +60,7 @@ class BrewGridStore extends EventEmitter {
             case "Tanks":
                 this.socket.updateTank(id, data.setTemp, data.controllerStatus);
                 break;
+            default:
         }
         this.emit("change");
     }
@@ -72,7 +73,7 @@ class BrewGridStore extends EventEmitter {
         if (!key || !value)
             state.status = state.status ? 0 : 1;
         else if (key === "status" && value)
-            state.status = parseInt(value);
+            state.status = Number.parseInt(value, 10);
         // emit to server for supported toggle assets
         switch (result.parent) {
             case "Valves":

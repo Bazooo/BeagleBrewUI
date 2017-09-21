@@ -554,6 +554,8 @@ div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagle
 
 div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input div.options-container > span.option {
 	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 div.beagleBrewCP div.beagleBrewCP-container div.beagleBrewCP-contents div.beagleBrewCP-content .content-data.enum-input div.options-container > span.option:hover {

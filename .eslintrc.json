@@ -22,10 +22,6 @@
             4,
             {"SwitchCase": 1}
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
         "quotes": [
             "error",
             "double"
@@ -71,6 +67,7 @@
         "no-undef": 1,
         "no-unused-vars": 1,
         "no-mixed-spaces-and-tabs": [1,"smart-tabs"],
-        "no-var": 1
+        "no-var": 1,
+        "radix": 1
     }
 }

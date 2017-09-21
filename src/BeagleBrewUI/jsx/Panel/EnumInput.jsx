@@ -23,6 +23,12 @@ export default class EnumInput extends BaseInput {
         }
     }
 
+    toggleOptions() {
+        this.setState((prevState) => ({
+            show: !prevState.show,
+        }));
+    }
+
     hideOptions() {
         this.setState({
             show: false,
@@ -60,7 +66,7 @@ export default class EnumInput extends BaseInput {
                     data-label={this.props.layout.label}
                     onBlur={this.hideOptions.bind(this)}
                     tabIndex="0">
-                    <span className="current-value" onClick={this.showOptions.bind(this)}>{value}</span>
+                    <span className="current-value" onClick={this.toggleOptions.bind(this)}>{value}</span>
                     {options}
                 </div>
             );
